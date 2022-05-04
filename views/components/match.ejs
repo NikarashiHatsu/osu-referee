@@ -1,0 +1,66 @@
+<div
+    x-data="{ showDetail: false }"
+    class="relative rounded-xl border mt-2 bg-slate-200"
+>
+    <!-- Header -->
+    <div class="aspect-w-16 aspect-h-3">
+        <img src="<%- match.background %>" alt="<%- match.name %>" class="w-full h-full object-cover rounded-xl filter brightness-50 my-0">
+        <div class="flex justify-between items-end p-4">
+            <div class="flex flex-col justify-between w-full h-full">
+                <p class="text-white my-0 text-sm">
+                    <%- match.date.toLocaleString('id') %>
+                </p>
+                <div class="flex flex-col">
+                    <h2 class="text-white my-0">
+                        <%= match.name %>
+                    </h2>
+                    <p class="text-white/90 italic my-0 text-sm">
+                        Referee: Naverlyn
+                    </p>
+        
+                    <p class="text-white my-0 flex items-center mt-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+                        </svg>
+                        <span class="ml-2">
+                            <%- match.participants.length %> participants
+                        </span>
+                    </p>
+        
+                    <p class="text-white my-0 flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4" />
+                        </svg>
+                        <span class="ml-2">
+                            <%- match.matches.length %> matches
+                        </span>
+                    </p>
+                </div>
+            </div>
+            <button
+                x-on:click="showDetail = !showDetail"
+                class="btn btn-info"
+            >
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                </svg>
+                <span class="ml-2">
+                    Detail
+                </span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Detail -->
+    <div
+        x-cloak
+        x-transition
+        x-show="showDetail"
+        class="px-12 py-4"
+    >
+        <% match.matches.forEach(function(matchDetail) { %>
+            <%- include('matchDetail', { matchDetail: matchDetail }) %>
+        <% }) %>
+    </div>
+</div>

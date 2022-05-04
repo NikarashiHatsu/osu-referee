@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <%- include('./partials/head') %>
+</head>
+<body class="antialiasing text-base font-display">
+  <%- include('./partials/navbar') %>
+  <div class="max-w-7xl mx-auto w-full flex flex-col prose">
+    <h3 class="mt-4">Recent Matches</h3>
+    <% recentMatches.forEach(function(match) { %>
+      <%- include('components/match', { match: match }) %>
+    <% }) %>
+  </div>
+</body>
+</html>

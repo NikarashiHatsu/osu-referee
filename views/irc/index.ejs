@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <%- include('./../partials/head') %>
+</head>
+<body class="antialiasing text-base font-display">
+  <%- include('./../partials/navbar') %>
+  <div class="max-w-7xl mx-auto w-full prose">
+    <h3 class="mt-4">Refsheet</h3>
+    <div class="card bg-base-100 border rounded-xl h-[80vh]">
+      <div class="card-body min-h-full">
+        <div class="h-full border border-gray-300 rounded-lg p-4">
+          <i class="text-sm text-gray-500">Take this as a chat room</i>
+        </div>
+        <div class="flex flex-end">
+          <form class="w-full flex">
+            <input type="text" name="message" class="input input-bordered w-full" placeholder="Input your message here">
+            <button class="btn btn-primary ml-4">
+              Send
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

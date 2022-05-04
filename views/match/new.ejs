@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <%- include('./../partials/head') %>
+</head>
+<body class="antialiasing text-base font-display">
+  <%- include('./../partials/navbar') %>
+  <div class="max-w-7xl mx-auto w-full flex flex-col prose">
+    <h3 class="mt-4">Create a New Match</h3>
+    <div class="card bg-base-100 rounded-xl border">
+      <div class="card-body">
+        <form
+          x-data="{ tournamentType: null }"
+          method="post"
+        >
+          <p class="mb-2 mt-0">
+            Tournament Prerequisites
+          </p>
+          <div class="grid grid-cols-12 grid-flow-row gap-4 border-b pb-4 mb-4">
+            <div class="col-span-12 sm:col-span-6 md:col-span-4 lg:col-span-3 form-group">
+              <label class="label">
+                <span class="label-text">Select bracket.json</span>
+              </label>
+              <input type="file" name="bracket_file" class="input input-bordered w-full">
+            </div>
+          </div>
+
+          <p class="mb-2 mt-0">
+            Tournament Details
+          </p>
+          <div class="grid grid-cols-12 grid-flow-row gap-4 border-b pb-4 mb-4">
+            <div class="col-span-12 sm:col-span-6 md:col-span-4 lg:col-span-3 form-group">
+              <label class="label">
+                <span class="label-text">Tournament Acronym</span>
+              </label>
+              <input type="text" name="tournament_acronym" class="input input-bordered w-full">
+            </div>
+            <div class="col-span-12 sm:col-span-6 md:col-span-4 lg:col-span-3 form-group">
+              <label class="label">
+                <span class="label-text">Tournament Type</span>
+              </label>
+              <select
+                x-model="tournamentType"
+                name="tournament_type"
+                class="select select-bordered w-full"
+              >
+                <option value="null">-Choose one-</option>
+                <option value="4">4 VS 4</option>
+                <option value="3">3 VS 3</option>
+                <option value="2">2 VS 2</option>
+                <option value="1">1 VS 1</option>
+                <option value="Team">Team VS</option>
+              </select>
+            </div>
+            <div class="col-span-12 sm:col-span-6 md:col-span-4 lg:col-span-3 form-group">
+              <label class="label">
+                <span class="label-text">Match Type</span>
+              </label>
+              <select name="match_type" class="select select-bordered w-full">
+                <option value="RO32">RO32</option>
+                <option value="RO16">RO16</option>
+                <option value="QF">QF</option>
+                <option value="SF">SF</option>
+                <option value="F">F</option>
+                <option value="GF">GF</option>
+              </select>
+            </div>
+          </div>
+
+          <p class="mb-2 mt-0">
+            Players
+          </p>
+
+          <!-- Semisal Tourney Type belum dipilih -->
+          <div
+            x-transition
+            x-show="tournamentType == null"
+          >
+            Data unavailable
+          </div>
+
+          <!-- Semisal Tourney Type dipilih angka vs angka -->
+          <div
+            x-transition
+            x-show="parseInt(tournamentType)"
+          >
+            <div class="grid grid-cols-12 grid-flow-row gap-4">
+              <template
+                x-for="i in parseInt(tournamentType)"
+                x-key="`player-a-${i}`"
+              >
+                <div
+                  x-transition
+                  class="col-span-12 sm:col-span-6 md:col-span-4 lg:col-span-3 form-group"
+                >
+                  <label class="label">
+                    <span
+                      x-html="`Player ${i}`"
+                      class="label-text"
+                    ></span>
+                  </label>
+                  <select name="player_a[]" class="select select-bordered w-full">
+                    <option value="Option 1">Option 1</option>
+                    <option value="Option 2">Option 2</option>
+                    <option value="Option 3">Option 3</option>
+                  </select>
+                </div>
+              </template>
+            </div>
+            <div class="divider">vs</div>
+            <div class="grid grid-cols-12 grid-flow-row gap-4">
+              <template
+                x-for="i in parseInt(tournamentType)"
+                x-key="`player-b-${i}`"
+              >
+                <div
+                  x-transition
+                  class="col-span-12 sm:col-span-6 md:col-span-4 lg:col-span-3 form-group"
+                >
+                  <label class="label">
+                    <span
+                      x-html="`Player ${i}`"
+                      class="label-text"
+                    ></span>
+                  </label>
+                  <select name="player_b[]" class="select select-bordered w-full">
+                    <option value="Option 1">Option 1</option>
+                    <option value="Option 2">Option 2</option>
+                    <option value="Option 3">Option 3</option>
+                  </select>
+                </div>
+              </template>
+            </div>
+          </div>
+
+          <!-- Semisal Tourney Type dipilih team vs -->
+          <div
+            x-transition
+            x-show="tournamentType === 'Team'"
+          >
+            <div class="grid grid-cols-12 grid-flow-row gap-4">
+              <div
+                x-transition
+                class="col-span-12 sm:col-span-6 md:col-span-4 lg:col-span-3 form-group"
+              >
+                <label class="label">
+                  <span class="label-text">Team A</span>
+                </label>
+                <select name="team_a[]" class="select select-bordered w-full">
+                  <option value="Option 1">Option 1</option>
+                  <option value="Option 2">Option 2</option>
+                  <option value="Option 3">Option 3</option>
+                </select>
+              </div>
+            </div>
+            <div class="divider">vs</div>
+            <div class="grid grid-cols-12 grid-flow-row gap-4">
+              <div
+                x-transition
+                class="col-span-12 sm:col-span-6 md:col-span-4 lg:col-span-3 form-group"
+              >
+                <label class="label">
+                  <span class="label-text">Team B</span>
+                </label>
+                <select name="team_b[]" class="select select-bordered w-full">
+                  <option value="Option 1">Option 1</option>
+                  <option value="Option 2">Option 2</option>
+                  <option value="Option 3">Option 3</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex justify-end mt-4">
+            <button class="btn btn-success">
+              Create a New Match
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,108 @@
+<div class="flex flex-col border mt-4 rounded-b-xl">
+    <div class="aspect-w-16 aspect-h-3">
+        <img src="<%- matchDetail.background %>" alt="<%- match.name %>" class="w-full h-full object-cover rounded-t-xl filter brightness-50 my-0">
+        <div class="flex justify-between items-end p-4">
+            <div class="flex flex-col justify-between w-full h-full">
+                <p class="text-white my-0 text-sm">
+                    <%- matchDetail.matchStart.toLocaleTimeString('id') %>
+                    -
+                    <%- matchDetail.matchEnd.toLocaleTimeString('id') %>
+                    <span class="ml-4">
+                        <%- matchDetail.mode %>
+                    </span>
+                </p>
+                <div class="flex flex-col">
+                    <h3 class="text-white my-0">
+                        <%= matchDetail.title %> [<%= matchDetail.difficulty %>]
+                    </h3>
+                    <p class="my-0 text-white text-sm">
+                        <%= matchDetail.artist %>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="p-4 bg-slate-100 rounded-b-xl">
+        <% matchDetail.metadata.forEach(function(player) { %>
+            <div class="flex justify-between bg-white border p-4 rounded-xl last-of-type:mt-2">
+                <!-- Player Information -->
+                <a href="<% player.link %>" class="no-underline">
+                    <%= player.player %>
+                </a>
+
+                <!-- Mods and Combo -->
+                <div class="flex">
+                    <!-- Mods -->
+                    <div class="mr-4">
+                        [<%= player.mod.join(', ') %>]
+                    </div>
+                    <!-- Combo -->
+                    <div>
+                        <span class="text-xs">
+                            Combo
+                        </span>
+                        <span class="font-semibold">
+                            <%= player.combo %>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Match statistic detail -->
+                <div class="flex flex-col">
+                    <div class="flex">
+                        <div class="flex items-baseline">
+                            <span class="text-xs">
+                                Accuracy
+                            </span>
+                            <span class="font-semibold ml-2">
+                                <%= player.accuracy %>%
+                            </span>
+                        </div>
+                        <div class="flex items-baseline ml-8">
+                            <span class="text-xs">
+                                Score
+                            </span>
+                            <span class="font-semibold ml-2">
+                                <%= player.finalScore.toLocaleString() %>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="flex justify-end">
+                        <div class="flex items-baseline">
+                            <span class="text-xs">
+                                300
+                            </span>
+                            <span class="font-semibold ml-2">
+                                <%= player.hit300s.toLocaleString() %>
+                            </span>
+                        </div>
+                        <div class="flex items-baseline ml-4">
+                            <span class="text-xs">
+                                100
+                            </span>
+                            <span class="font-semibold ml-2">
+                                <%= player.hit100s.toLocaleString() %>
+                            </span>
+                        </div>
+                        <div class="flex items-baseline ml-4">
+                            <span class="text-xs">
+                                50
+                            </span>
+                            <span class="font-semibold ml-2">
+                                <%= player.hit300s.toLocaleString() %>
+                            </span>
+                        </div>
+                        <div class="flex items-baseline ml-4">
+                            <span class="text-xs">
+                                Miss
+                            </span>
+                            <span class="font-semibold ml-2">
+                                <%= player.miss.toLocaleString() %>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <% }) %>
+    </div>
+</div>
